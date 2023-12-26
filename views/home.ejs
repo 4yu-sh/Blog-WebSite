@@ -1,0 +1,24 @@
+<%- include("partials/header") -%>
+
+<div class="text-left text-slate-700 font-light my-4  mb-[5%] px-96">
+
+    <h2 class="text-3xl font-normal">Home</h2>
+    <p class="my-6">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed quisquam assumenda, maiores eos ullam provident iste officiis nam ut itaque doloribus beatae odit, dicta consequuntur recusandae hic! Assumenda, vel error? <br>
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque corporis numquam beatae qui porro maxime facere nam inventore tempore debitis! Ducimus at inventore iste nemo aliquam rem possimus suscipit laudantium. Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam officia quibusdam iure saepe autem minus aliquid eius quasi! Aperiam aliquid ab cumque dolor esse provident molestias sequi ipsum alias a?</p>
+    </div>
+    <div class="text-slate-700 font-light my-4 mb-[5%] px-96">
+        <ul class="space-y-11">
+            
+            <% for ( let i = 0 ; i < posts.length ; i++ ){ %>   
+                <li><h3 class="text-2xl font-normal" > <%= posts[i].postTitle %> </h3>
+                    <p> <%= posts[i].postContent.substring(0,100) + "..." %> <a href="">Read More</a> </p>
+                </li>
+            <% } %>
+            
+        </ul>
+    </div>
+
+    <div>
+        <button type="button"> + </button>
+    </div>
+<%- include ("partials/footer"); -%>

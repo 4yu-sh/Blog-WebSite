@@ -1,0 +1,25 @@
+<%- include("partials/header") -%>
+
+<div class="text-left text-slate-700 font-light my-4  mb-[5%] px-96">
+
+
+    <h2 class="text-3xl font-normal my-6" >Compose </h2>
+
+        <form action="/compose" method="post"> 
+
+            <div class="flex flex-col space-y-4 mt-4"> 
+            
+                <label for="postTitle">Post Title: </label>
+                <input name="postTitle" id="postTitle" placeholder="Title" type="text" class="border border-black rounded p-2 "> 
+                
+                <label for="postContent">Post content: </label>
+                <textarea name="postContent" id="postContent" placeholder="Content" cols="30" rows="10" class="border border-black rounded p-2 resize-none"></textarea>
+
+                <button type="submit" class="bg-gray-600 rounded text-white">Post</button>
+                
+            </div>
+        </form>
+
+</div>
+
+<%- include("partials/footer") -%>
