@@ -11,7 +11,7 @@
             
             <% for ( let i = 0 ; i < posts.length ; i++ ){ %>   
                 <li><h3 class="text-2xl font-normal" > <%= posts[i].postTitle %> </h3>
-                    <p> <%= posts[i].postContent.substring(0,100) + "..." %> <a href="">Read More</a> </p>
+                    <p> <%= posts[i].postContent.substring(0,100) + "..." %> <a href="/posts/<%= posts[i].postTitle %>">Read More</a> </p>
                 </li>
             <% } %>
             
@@ -21,4 +21,5 @@
     <div>
         <button type="button"> + </button>
     </div>
+
 <%- include ("partials/footer"); -%>
