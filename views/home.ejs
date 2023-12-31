@@ -21,7 +21,7 @@
       <h3 class="text-2xl font-normal"><%= posts[i].postTitle %></h3>
       <p>
         <%= posts[i].postContent.substring(0,100) + "..." %>
-        <a href="/posts/<%= posts[i].postTitle %>">Read More</a>
+        <a href="/posts/<%= posts[i].postTitle %>" class="text-blue-700">Read More</a>
       </p>
     </li>
     <% } %>
