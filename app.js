@@ -1,6 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const _ = require("lodash");
+const mongoose = require("mongoose");
+const posts = require("./posts");
 
 const app = express();
 
@@ -8,11 +10,12 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const posts = [];
+mongoose.connect("mongodb://localhost/blogWeb_db");
+const allPosts = posts.find();
 
 app.get("/", function (req, res) {
   res.render("home", {
-    posts: posts,
+    posts: allPosts,
   });
 });
 
@@ -20,32 +23,30 @@ app.get("/:page", function (req, res) {
   res.render(req.params.page);
 });
 
-// app.get("/about",function(req,res){
-//     res.render("about")
-// });
-// app.get("/contact",function(req,res){
-//     res.render("contact")
-// });
-// app.get("/compose",function(req,res){
-//     res.render("compose")
-// });
-// app.get("/post",function(req,res){
-//     res.render("post")
-// });
+
 
 app.post("/compose", function (req, res) {
   const title = req.body.postTitle;
   const body = req.body.postContent;
 
-  var post = {
-    postTitle: title,
-    postContent: body,
-  };
+  main()
+  async function main() {
+    console.log("Sucessfully Connected To the Database");
 
-  posts.push(post);
+    try {
+      const post = await posts.create({
+        postTitle: title,
+        postContent: body,
+      });
+      await post.save().then(() => console.log("Successfully Saved"));
 
-  console.log(posts);
-
+      // console.log(allPosts);
+      
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+  
   res.redirect("/");
 });
 
@@ -53,12 +54,12 @@ app.get("/posts/:postitle", function (req, res) {
   const requestedTitle = _.lowerCase(req.params.postitle);
 
   for (let i = 0; i < posts.length; i++) {
-    const storedTitle = _.lowerCase(posts[i].postTitle);
+    const storedTitle = _.lowerCase(allPosts[i].postTitle);
 
     if (requestedTitle === storedTitle) {
       res.render("post", {
-        title: posts[i].postTitle,
-        content: posts[i].postContent,
+        title: allPosts[i].postTitle,
+        content: allPosts[i].postContent,
       });
     }
   }
