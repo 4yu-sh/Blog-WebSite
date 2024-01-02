@@ -10,6 +10,7 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
 mongoose.connect("mongodb://localhost/blogWeb_db");
 
 app.get("/", async (req, res) => {
@@ -20,6 +21,7 @@ app.get("/", async (req, res) => {
 app.get("/:page", function (req, res) {
   res.render(req.params.page);
 });
+
 
 app.post("/compose", function (req, res) {
   const title = req.body.postTitle;
@@ -64,6 +66,7 @@ app.get("/posts/:postitle", function (req, res) {
   }
 });
 
-app.listen(3000, function () {
+app.listen(3000 || process.env.PORT, function () {
+
   console.log("Server is Running on p-3000");
 });
